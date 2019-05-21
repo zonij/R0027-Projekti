@@ -1,0 +1,283 @@
+import java.util.Scanner;
+
+import java.io.*;
+
+import java.lang.Math;
+
+public class Tietovisa {
+
+	public static void main(String[] args) {
+
+		// Tässä kutsutaan Scanner-työkalua ja annetaan nimeksi "lukija"
+
+		Scanner lukija = new Scanner(System.in);
+
+		int oikeatVastaukset = 0;
+
+		int[] kysytyt = new int[10];
+
+		// Koska tyhjän taulukon oletusarvot on nollia (0) alustetaan ne -2:ksi
+
+		// Muuten kysymys 0 löytyy aina kysyttyjen listalta
+
+		for (int i = 0; i < kysytyt.length; ++i) {
+
+			kysytyt[i] = -2;
+
+		}
+
+		// Tietovisa esittelee itsensä, kysyy pelaajalta nimen ja tallettaa sen
+
+		// myöhempään käyttöä varten
+
+		System.out.println("Tervetuloa pelaamaan SuperQuizia!");
+
+		System.out.println("Anna nimesi: ");
+
+		String nimi = lukija.nextLine();
+
+		System.out.println("Hei " + nimi
+
+				+ "! Esitämme sinulle 10 kysymystä, jonka jälkeen saat tuloksesi. Vastaa numeroilla 1-4.");
+
+		// kysymykset on alustettu yksiulotteiseen taulukkoon, jonne on helppo
+
+		// lisätä kysymyksiä halutessaan. Tällä hetkellä kysymyksiä on 31.
+
+		String[] kysymykset;
+
+		kysymykset = new String[31];
+
+		kysymykset[0] = "Mikä on Ranskan pääkaupunki?";
+
+		kysymykset[1] = "Minä vuonna Big Ben on rakennettu?";
+
+		kysymykset[2] = "Mihin kansaan kuului kuuluisa kiinalainen merenkävijä ja tutkimusmatkailija Zheng He?";
+
+		kysymykset[3] = "Kuka on kirjoittanut kirjan Sodankäynnin taito?";
+
+		kysymykset[4] = "Miten pitkä on Kiinan muuri?";
+
+		kysymykset[5] = "Missä järjestettiin ensimmäiset modernit olympialaiset?";
+
+		kysymykset[6] = "Kuka on Japanin nykyinen keisari?";
+
+		kysymykset[7] = "Kuka oli metsän jumala suomalaisessa mytologiassa?";
+
+		kysymykset[8] = "Kuka oli Rooman keisarin vuosina 54-68?";
+
+		kysymykset[9] = "Mikä on Australian pääkaupunki?";
+
+		kysymykset[10] = "Mikä oli ainoa Afrikan maa, joka ei ollut siirtomaavallan alla?";
+
+		kysymykset[11] = "Mikä on Beninin pääkaupunki?";
+
+		kysymykset[12] = "Mikä on Missourin pääkaupunki?";
+
+		kysymykset[13] = "Mikä on Tongan kuninkaan nimi?";
+
+		kysymykset[14] = "Mikä on Kanadan pääkaupunki?";
+
+		kysymykset[15] = "Mikä on Brasilian korkein vuori?";
+
+		kysymykset[16] = "Mikä on Euroopan korkein vuori?";
+
+		kysymykset[17] = "Mikä on Kirgisian pääkaupunki?";
+
+		kysymykset[18] = "Mikä on Bangladeshin virallinen kieli?";
+
+		kysymykset[19] = "Mikä valtio sijaitsee enklaavina Etelä-Afrikan sisällä?";
+
+		kysymykset[20] = "Mikä sota käytiin vuosina 1914-1918?";
+
+		kysymykset[21] = "Missä sijaitsee Brittiläinen Kolumbia?";
+
+		kysymykset[22] = "Mikä on Venezuelan pääkaupunki?";
+
+		kysymykset[23] = "Kuka saavutti ensimmäisenä etelänavan?";
+
+		kysymykset[24] = "Minä vuonna Neuvostoliitto perustettiin?";
+
+		kysymykset[25] = "Mikä on Bulgarian pääkaupunki?";
+
+		kysymykset[26] = "Mikä seuraavista on keskiaikainen yhteiskuntaluokka Suomessa?";
+
+		kysymykset[27] = "Mikä on Islannin suurin jäätikkö?";
+
+		kysymykset[28] = "Mikä on Irlannin pääkaupunki?";
+
+		kysymykset[29] = "Mikä oli Espanjaa hallinneen diktaattori Francon etunimi?";
+
+		kysymykset[30] = "Mikä on Intian valuutta?";
+
+		// vastaukset on alustettu kaksiulotteiseen taulukkoon, jossa oikea
+
+		// vastaus toistetaan aina viidennessä indeksissä.
+
+		String vastausTaulukko[][] = { { "1) Lontoo", "2) Pariisi", "3) Berliini", "4) Barcelona", "2) Pariisi" },
+
+				{ "1) 1798", "2) 1750", "3) 1859", "4) 1905", "3) 1859" },
+
+				{ "1) Hui", "2) Hei", "3) Hai", "4) Hoi", "1) Hui" },
+
+				{ "1) Tan Tze", "2) Sun Tzu", "3) Lao Tzu", "4) Tze Tzu", "2) Sun Tzu" },
+
+				{ "1) 210 km", "2) 2100 km", "3) 21 000 km", "4) 210 000 km", "3) 21 000 km" },
+
+				{ "1) Ateena", "2) Rooma", "3) Pariisi", "4) Kisinov", "1) Ateena" },
+
+				{ "1) Akihito", "2) Hirohito", "3) Morihito", "4) Naruhito", "4) Naruhito" },
+
+				{ "1) Tapio", "2) Ukko", "3) Kalle", "4) Jorma", "1) Tapio" },
+
+				{ "1) Nero", "2) Julius Caesar", "3) Claudius", "4) Caligula", "1) Nero" },
+
+				{ "1) Sydney", "2) Melbourne", "3) Brisbane", "4) Canberra", "4) Canberra" },
+
+				{ "1) Etiopia", "2) Eritrea", "3) Liberia", "4) Angola", "3) Liberia" },
+
+				{ "1) Porto-Novo", "2) Accra", "3) Cotonou", "4) Abidjan", "1) Porto-Novo" },
+
+				{ "1) St. Louis", "2) Jefferson City", "3) Les Moines", "4) Branson", "2) Jefferson City" },
+
+				{ "1) Nauaku III", "2) Tupou VI", "3) Anoai II", "4) Tuaoku Naou", "2) Tupou VI" },
+
+				{ "1) Vancouver", "2) Toronto", "3) Montreal", "4) Ottawa", "4) Ottawa" },
+
+				{ "1) Pico da Neblina", "2) Campinas", "3) Pico da Espirito", "4) Nova Iguacu", "1) Pico da Neblina" },
+
+				{ "1) Saana", "2) Denali", "3) Mount Kosciuszko", "4) Mont Blanc", "4) Mont Blanc" },
+
+				{ "1) Bishkek", "2) Issyk-Kul", "3) Dushanbe", "4) Karakul", "1) Bishkek" },
+
+				{ "1) Dhaka", "2) Sanskrit", "3) Bengali", "4) Paal", "3) Bengali" },
+
+				{ "1) Angola", "2) Lesotho", "3) Mosambik", "4) Durban", "2) Lesotho" },
+
+				{ "1) Napoleonin sodat", "2) 100 vuoden sota", "3) 1. Maailmansota", "4) 2. Maailmansota",
+
+						"3) 1. Maailmansota" },
+
+				{ "1) Kanadassa", "2) Kolumbiassa", "3) Yhdysvalloissa", "4) Englannissa", "1) Kanadassa" },
+
+				{ "1) Quito", "2) Buenos Aires", "3) Caracas", "4) Maracaibo", "3) Caracas" },
+
+				{ "1) Umberto Nobile", "2) William Scoresby", "3) Vasco da Gama", "4) Roald Amundsen",
+
+						"4) Roald Amundsen" },
+
+				{ "1) 1922", "2) 1932", "3) 1942", "4) 1952", "1) 1922" },
+
+				{ "1) Bukarest", "2) Budapest", "3) Minsk", "4) Sofia", "4) Sofia" },
+
+				{ "1) Pärssi", "2) Rälssi", "3) Kinse", "4) Vatu", "2) Rälssi" },
+
+				{ "1) Eyafyajökull", "2) Kverkfjoll", "3) Myrdalskökull", "4) Vatnäjökull", "4) Vatnäjökull" },
+
+				{ "1) Dublin", "2) Belfast", "3) Glasgow", "4) Cardiff", "1) Dublin" },
+
+				{ "1) Sebastian", "2) Julio", "3) Francisco", "4) Eduardo", "3) Francisco" },
+
+				{ "1) shillinki", "2) rupia", "3) peseta", "4) forintti", "2) rupia" },
+
+		};
+
+		// for-silmukka, joka randomizerin avulla kysyy 10 sattumanvaraisesti
+
+		// valittua kysymystä
+
+		boolean loytyy = false;
+
+		for (int x = 0; x < 10; x++) {
+
+			int kys = -1;
+
+			do {
+
+				kys = (int) (Math.random() * 30);
+
+
+
+				for (int i = 0; i < kysytyt.length; i++) {
+
+					// Löytyykö kysymyksen numero jo taulukosta
+
+					if (kysytyt[i] == kys) {
+
+
+						loytyy = true;
+
+						break;
+
+					}
+
+					else {
+
+						loytyy = false;
+
+					}
+
+				}
+
+
+			} while (loytyy == true);
+
+			// Kun silmukasta on päästy, eli on löydetty kysymys joka ei ollut
+
+			// taulukossa, lisätään se kysyttyjen joukkoon
+
+			kysytyt[x] = kys;
+
+			// tulostaa oikean kysymysumeron, kun laittaa x+1 (x on alustettu
+
+			// arvolla 0)
+
+			System.out.println(x + 1 + ". kysymys:");
+
+			System.out.println(kysymykset[kys]);
+
+			// Tämä for-silmukka tulostaa taulukosta 4 ensimmäistä
+
+			// vastausvaihtoa
+
+			for (int i = 0; i < 4; i++) {
+
+				System.out.println(vastausTaulukko[kys][i]);
+
+			}
+
+			int vastaus = lukija.nextInt();
+
+			// Tässä käyttäjän antamaa vastausta verrrataan oikeaan vastaukseen,
+
+			// joka on taulukon indeksissä 4
+
+			if (vastausTaulukko[kys][vastaus - 1].equals(vastausTaulukko[kys][4])) {
+
+				oikeatVastaukset++;
+
+				System.out.println("Vastasit oikein");
+
+			}
+
+		}
+
+		// Tässä lopussa peli kommentoi saatua tulosta ja kuinka paljon pisteitä
+
+		// pelaaja sai. Peli osaa käyttää myös pelaajan syöttämää nimeä.
+
+		if (oikeatVastaukset >= 7)
+
+			System.out.println("Hienoa " + nimi + "! Sait " + oikeatVastaukset + " oikein! Olet nero!");
+
+		else if (oikeatVastaukset > 3 && oikeatVastaukset <= 6)
+
+			System.out.println("Ihan hyvä suoritus, " + nimi + "! Sait " + oikeatVastaukset + " oikein!");
+
+		else
+
+			System.out.println("Paremminkin oisi voinut mennä, " + nimi + "! Sait " + oikeatVastaukset + " oikein!");
+
+	}
+
+}
